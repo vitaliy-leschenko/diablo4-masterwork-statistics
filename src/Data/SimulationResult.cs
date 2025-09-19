@@ -1,6 +1,6 @@
 ﻿namespace MasterworkSimulation.Data
 {
-    public record SimulationResult(int Obducide, int FogottenSouls, long Gold, int Resets) : Resource(Obducide, FogottenSouls, Gold)
+    public record SimulationResult(int Obducide, int FogottenSouls, long Gold, int Resets)
     {
         public static implicit operator SimulationResult((Resource Resource, int Resets) data)
         {

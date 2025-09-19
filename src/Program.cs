@@ -21,18 +21,18 @@ void RunSimulations(int affixCount, int trials, string title)
     Console.WriteLine("|Reset interval|Probability in interval|Total probability|");
     Console.WriteLine("|:----|----:|----:|");
 
-    var prev = -1;
-    for (var att = 10; att <= 150; prev = att, att += 10)
+    for (var from = 0; from < 150; from += 10)
     {
-        var rate = (double)results.Count(t => t.Resets <= att) / results.Length;
-        var rate2 = (double)results.Count(t => t.Resets > prev && t.Resets <= att) / results.Length;
-        Console.WriteLine($"|{att - 10}..{att}|{rate2:P2}|{rate:P2}|");
+        var to = from + 9;
+        var rate = (double)results.Count(t => t.Resets >= from && t.Resets <= to) / results.Length;
+        var totalRate = (double)results.Count(t => t.Resets <= to) / results.Length;
+        Console.WriteLine($"|{from}..{to}|{rate:P2}|{totalRate:P2}|");
     }
 
     Console.WriteLine("## Average");
     Console.WriteLine("|Obducide|Fogotten Souls|Gold|Resets|");
     Console.WriteLine("|----:|----:|----:|----:|");
-    Console.WriteLine($"{results.Average(t => t.Obducide)}|{results.Average(t => t.FogottenSouls)}|{results.Average(t => t.Gold)}|{results.Average(t => t.Resets)}|");
+    Console.WriteLine($"{(int)results.Average(t => t.Obducide)}|{(int)results.Average(t => t.FogottenSouls)}|{(int)results.Average(t => t.Gold)}|{(int)results.Average(t => t.Resets)}|");
 
     Console.WriteLine("## Percentile");
     Console.WriteLine("|Percentile|Obducide|Fogotten Souls|Gold|Resets|");

@@ -30,7 +30,9 @@ void RunSimulations(int affixCount, int trials, string title)
     }
 
     Console.WriteLine("## Average");
-    Console.WriteLine($"`Obducide: {results.Average(t => t.Obducide)}, Fogotten Souls: {results.Average(t => t.FogottenSouls)}, Gold: {results.Average(t => t.Gold)}, Resets: {results.Average(t => t.Resets)}`");
+    Console.WriteLine("|Obducide|Fogotten Souls|Gold|Resets|");
+    Console.WriteLine("|----:|----:|----:|----:|");
+    Console.WriteLine($"{results.Average(t => t.Obducide)}|{results.Average(t => t.FogottenSouls)}|{results.Average(t => t.Gold)}|{results.Average(t => t.Resets)}|");
 
     Console.WriteLine("## Percentile");
     Console.WriteLine("|Percentile|Obducide|Fogotten Souls|Gold|Resets|");

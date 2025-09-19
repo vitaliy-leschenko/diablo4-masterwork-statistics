@@ -28,7 +28,7 @@ namespace MasterworkSimulation
             upgradeCosts = [.. itemCosts.Chunk(4).Select(chunk => chunk.Aggregate(Resource.Zero, (sum, item) => item + sum))];
         }
 
-        public SimulationResult GetSimulation(int n = 5)
+        public SimulationResult GetSimulation(int affixCount)
         {
             int count = 3;
 
@@ -38,8 +38,8 @@ namespace MasterworkSimulation
             while (true)
             {
                 resource += upgradeCosts[streak];
-                var roll = rnd.Next(n);
-                if (roll == n - 1)
+                var roll = rnd.Next(affixCount);
+                if (roll == affixCount - 1)
                 {
                     streak++;
                     if (streak == count)
@@ -54,6 +54,11 @@ namespace MasterworkSimulation
                     resource += resetCost;
                 }
             }
+        }
+
+        public SimulationResult[] GetSimulations(int affixCount, int trials = 1000)
+        {
+            return [.. Enumerable.Range(0, trials).Select(_ => GetSimulation(affixCount))];
         }
     }
 }
